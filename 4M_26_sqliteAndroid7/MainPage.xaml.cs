@@ -34,7 +34,13 @@ namespace _4M_26_sqliteAndroid7
             Init();
             return database.Table<Uczen>().ToList();
         }
+        public Uczen GetStudent(int id)
+        {
+            Init();
+            return database.Table<Uczen>().Where(i=>i.id == id).FirstOrDefault();
+        }
 
+        
     }
     public class Uczen
     {
@@ -65,6 +71,12 @@ namespace _4M_26_sqliteAndroid7
             uczniowie.Clear();
             uczniowie = baza.GetAllStudents();
             lblIle.Text = uczniowie.Count.ToString();
+        }
+        private void btnUczen1(object sender, EventArgs e)
+        {
+            Uczen uczen = new Uczen();
+            uczen = baza.GetStudent(1);
+            lblUczen1.Text=uczen.id.ToString()+" "+uczen.name+" " + uczen.klasa;
         }
 
     }

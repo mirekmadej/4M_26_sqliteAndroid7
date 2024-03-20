@@ -13,7 +13,10 @@
             <Button Text="pobierz wszystkie"
                     Clicked="btnPobierzWszystkie"
                     />
-
+            <Label Text="uczeń nr 1" x:Name="lblUczen1" />
+            <Button Text="pobierz ucznia nr 1" 
+                    Clicked="btnUczen1" 
+                    />
 
         </VerticalStackLayout>
     </ScrollView>
