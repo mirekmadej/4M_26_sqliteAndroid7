@@ -29,6 +29,11 @@ namespace _4M_26_sqliteAndroid7
         {
             return database.Insert(item);
         }
+        public List<Uczen> GetAllStudents()
+        {
+            Init();
+            return database.Table<Uczen>().ToList();
+        }
 
     }
     public class Uczen
@@ -41,11 +46,13 @@ namespace _4M_26_sqliteAndroid7
     public partial class MainPage : ContentPage
     {
         int count = 0;
+        List<Uczen> uczniowie = new List<Uczen>();
+        private static Baza baza;
 
         public MainPage()
         {
             InitializeComponent();
-            Baza baza = new Baza();
+            baza = new Baza();
             baza.Init();
             Uczen u = new Uczen();
             u.name = "Ala Kot";
@@ -53,18 +60,15 @@ namespace _4M_26_sqliteAndroid7
             baza.Add(u);
         }
 
-        private void OnCounterClicked(object sender, EventArgs e)
+        public void btnPobierzWszystkie(object sender, EventArgs e)
         {
-            count++;
-
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
+            uczniowie.Clear();
+            uczniowie = baza.GetAllStudents();
+            lblIle.Text = uczniowie.Count.ToString();
         }
+
     }
+     
 
 }
 
